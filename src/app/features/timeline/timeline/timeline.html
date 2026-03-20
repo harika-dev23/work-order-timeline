@@ -1,0 +1,77 @@
+<div class="toolbar">
+  <div class="toolbar-left">
+    <span class="toolbar-title">Work Orders</span>
+  </div>
+  <div class="toolbar-right">
+    <button class="today-btn" (click)="scrollToToday()">Today</button>
+    <span class="toolbar-label">Timescale</span>
+    <select class="zoom-select" [(ngModel)]="zoomLevel" (change)="onZoomChange()">
+      <option value="day">Day</option>
+      <option value="week">Week</option>
+      <option value="month">Month</option>
+    </select>
+  </div>
+</div>
+
+<div class="timeline-container">
+  <div class="left-panel">
+    <div class="left-header">Work Centers</div>
+    <div class="work-center-row" *ngFor="let wc of workCenters">
+      {{ wc.data.name }}
+    </div>
+  </div>
+
+  <div class="right-panel" #rightPanel>
+    <div class="date-header-row" [style.width.px]="visibleDates.length * dayWidth">
+      <div
+        class="date-cell"
+        *ngFor="let date of visibleDates"
+        [style.width.px]="dayWidth"
+        [class.col-start]="isColumnStart(date)"
+      >
+        <span class="date-label">{{ getDateLabel(date) }}</span>
+      </div>
+    </div>
+
+    <div
+      class="timeline-row"
+      *ngFor="let wc of workCenters"
+      [style.width.px]="visibleDates.length * dayWidth"
+      (click)="onTimelineRowClick(wc, $event)"
+    >
+      <div class="today-line" [style.left.px]="getTodayLeftPx()"></div>
+      <div
+  class="work-order-bar"
+  *ngFor="let order of getOrdersForWorkCenter(wc.docId)"
+  [ngStyle]="{
+    left: getLeftPosition(order) + 'px',
+    width: getBarWidth(order) + 'px'
+  }"
+  [class]="'status-' + order.data.status"
+>
+  <span class="bar-name">{{ order.data.name }}</span>
+  <span class="bar-badge">{{ getStatusLabel(order.data.status) }}</span>
+  <button class="menu-btn" (click)="toggleMenu(order, $event)">⋮</button>
+
+  @if (openMenuOrderId === order.docId) {
+    <div class="bar-dropdown">
+      <button class="dropdown-item" (click)="onEditOrder(order, $event)">✏ Edit</button>
+      <button class="dropdown-item danger" (click)="onDeleteOrder(order, $event)">🗑 Delete</button>
+    </div>
+  }
+</div>
+
+    </div>
+
+  </div>
+</div>
+<app-create-edit-panel
+  [isOpen]="panelOpen"
+  [mode]="panelMode"
+  [prefillDate]="panelPrefillDate"
+  [prefillWorkCenterId]="panelPrefillWorkCenterId"
+  [editingOrder]="panelEditingOrder"
+  [workCenters]="workCenters"
+  (closed)="onPanelClosed()"
+  (saved)="onPanelSaved()"
+></app-create-edit-panel>

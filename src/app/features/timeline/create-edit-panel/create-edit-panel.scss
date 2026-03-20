@@ -1,0 +1,141 @@
+.panel-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 199;
+  animation: fade-in 0.2s ease;
+}
+
+.side-panel {
+  position: fixed;
+  top: 0; right: 0;
+  height: 100vh;
+  width: 400px;
+  background: #fff;
+  box-shadow: -4px 0 24px rgba(0,0,0,0.12);
+  z-index: 200;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  &.open { transform: translateX(0); }
+}
+
+.panel-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px;
+  border-bottom: 1px solid #F0F2F5;
+}
+
+.panel-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.close-btn {
+  width: 32px; height: 32px;
+  border: 1px solid #E5E7EB;
+  border-radius: 6px;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #6B7280;
+  &:hover { background: #F3F4F6; }
+}
+
+.panel-form {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  &.has-error .form-input { border-color: #EF4444; }
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  .req { color: #EF4444; }
+}
+
+.form-input {
+  height: 40px;
+  padding: 0 12px;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 8px;
+  font-family: 'Circular-Std', sans-serif;
+  font-size: 14px;
+  color: #111827;
+  background: #FAFAFA;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+  &:focus { border-color: #3B9EE6; background: #fff; }
+}
+
+.error-msg {
+  font-size: 12px;
+  color: #EF4444;
+  font-weight: 500;
+}
+
+.overlap-error {
+  padding: 12px;
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #B91C1C;
+  font-weight: 500;
+}
+
+.panel-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.btn {
+  flex: 1;
+  height: 42px;
+  border-radius: 8px;
+  font-family: 'Circular-Std', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+
+  &.btn-cancel {
+    background: #F3F4F6;
+    color: #374151;
+    border: 1.5px solid #E5E7EB;
+    &:hover { background: #E5E7EB; }
+  }
+
+  &.btn-primary {
+    background: linear-gradient(135deg, #3B9EE6, #1A6FBF);
+    color: #fff;
+    &:hover { filter: brightness(1.08); }
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
