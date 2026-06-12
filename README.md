@@ -66,3 +66,23 @@ src/app/
 2. Work order bars positioned using pixel offsets from date math
 3. Single panel component handles both create and edit via `mode` flag
 4. Overlap detection checks date ranges before saving
+
+## Screenshots
+
+### Day View
+![Day View](screenshots/day-view.png)
+
+### Week View
+![Week View](screenshots/week-view.png)
+
+### Create Work Order
+![Create Panel](screenshots/create-panel.png)
+
+### Edit Dropdown
+![Edit Panel](screenshots/edit-dropdown.png)
+
+### Edit Work Order
+![Edit Panel](screenshots/edit-panel.png)
+
+### Overlap Validation
+![Overlap Error](screenshots/overlap-error.png)
